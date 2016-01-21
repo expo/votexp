@@ -12,6 +12,8 @@ import React, {
 import ContestEntry from 'ContestEntry';
 import EntryData from '../data';
 
+import shuffle from 'shuffle';
+
 export default class ContestEntryList extends React.Component {
 
   constructor(props, context) {
@@ -22,7 +24,7 @@ export default class ContestEntryList extends React.Component {
     });
 
     this.state = {
-      dataSource: dataSource.cloneWithRows(EntryData),
+      dataSource: dataSource.cloneWithRows(shuffle(EntryData)),
     };
   }
 

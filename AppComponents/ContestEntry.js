@@ -18,6 +18,7 @@ const { EXURLHandler } = NativeModules;
 
 import { connect } from 'react-redux';
 
+import Api from 'Api';
 import FadeIn from 'FadeIn';
 import ResponsiveImage from 'ResponsiveImage';
 import WithFreightSansFont from 'WithFreightSansFont';
@@ -34,6 +35,7 @@ class ContestEntry extends React.Component {
     return {
       votes: data.allVotes[props.title] || 0,
       alreadyVoted: data.myVotes.indexOf(props.title) !== -1,
+      userEmail: data.user.email,
     };
   };
 
@@ -47,11 +49,13 @@ class ContestEntry extends React.Component {
     return (
       <View style={styles.container} shouldRasterizeIOS>
         <View style={styles.meta}>
-          <TouchableOpacity style={{flexDirection: 'row', marginRight: 10, alignItems: 'center', justifyContent: 'center'}}>
-            <ResponsiveImage filename={this.props.alreadyVoted ? "heart-full" : "heart-empty"} style={{width: 18, height: 17}} />
+          <TouchableOpacity
+            onPress={() => { this._submitVoteAsync() }}
+            style={{flexDirection: 'row', marginRight: 10, alignItems: 'center', justifyContent: 'center'}}>
+            <ResponsiveImage filename={this.props.alreadyVoted ? "heart-full" : "heart-empty"} style={{width: 19, height: 17}} />
             <WithFreightSansFont>
               <Text style={styles.voteButtonText}>
-                {this.props.votes}
+                {this.props.votes} {this.props.votes === 0 || this.props.votes > 1 ? 'votes' : 'vote'}
               </Text>
             </WithFreightSansFont>
           </TouchableOpacity>
@@ -105,6 +109,23 @@ class ContestEntry extends React.Component {
   //   </WithFreightSansFont>
   // </View>
 
+  async _submitVoteAsync() {
+    let {
+      title,
+      userEmail,
+    } = this.props;
+
+    if (!this.props.userEmail) {
+      return;
+    }
+
+    let result = await Api.submitVoteAsync(userEmail, title);
+
+    this.props.dispatch({
+      type: 'UPDATE_DATA',
+      result,
+    });
+  }
 
   _openEntry() {
     if (Platform.OS === 'android' && this.props.iosOnly) {
@@ -185,14 +206,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   voteButtonText: {
-    marginLeft: 3,
+    marginLeft: 4,
     fontFamily: 'FreightSansLFPro',
     fontSize: 20 * FontSizeMultiplier,
     color: '#888',
     paddingTop: Platform.OS === 'ios' ? 3 : 0,
   },
   viewCountText: {
-    marginLeft: 3,
+    marginLeft: 4,
     fontFamily: 'FreightSansLFPro',
     fontSize: 20 * FontSizeMultiplier,
     color: '#888',

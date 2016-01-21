@@ -1,7 +1,7 @@
 {
-  "name": "votexp",
-  "version": "0.0.0",
-  "description": "Hello Exponent!",
+  "name": "contest",
+  "version": "1.0.0",
+  "description": "Check out some entries and vote for your favorites!",
   "main": "main.js",
   "author": "brentvatne@gmail.com",
   "dependencies": {
@@ -13,5 +13,10 @@
     "react-redux": "^4.0.6",
     "react-timer-mixin": "^0.13.3",
     "redux": "^3.0.5"
+  },
+  "exp": {
+    "name": "React.js Conf Contest Entries",
+    "primaryColor": "#151518",
+    "iconUrl": "https://s3-us-west-2.amazonaws.com/votexp/react-conf-contest-logo.png"
   }
 }

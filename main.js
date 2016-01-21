@@ -12,8 +12,10 @@ import React, {
 
 import { Provider } from 'react-redux';
 
+import AccountStorage from 'AccountStorage';
 import Api from 'Api';
 import ContestEntryList from 'ContestEntryList';
+import EmailDialog from 'EmailDialog';
 import HeaderBar from 'HeaderBar';
 import InfoDialog from 'InfoDialog';
 import VoteStore from 'VoteStore';
@@ -24,7 +26,9 @@ class VoteApp extends React.Component {
     if (StatusBarIOS) {
       StatusBarIOS.setStyle('light-content', false);
     }
+  }
 
+  componentDidMount() {
     this._loadData();
   }
 
@@ -37,14 +41,26 @@ class VoteApp extends React.Component {
             <HeaderBar onPressInfo={this._handlePressInfo.bind(this)} />
           </View>
 
-          <InfoDialog ref={view => { this._infoDialog = view; }} />
+          { /* <InfoDialog ref={view => { this._infoDialog = view; }} /> */ }
+          <EmailDialog ref={view => { this._emailDialog = view; }} />
         </View>
       </Provider>
     );
   }
 
   async _loadData() {
-    let result = await Api.getVotesAsync();
+    let user = await AccountStorage.loadAccountAsync();
+    let email = user && user.email;
+    let result = await Api.getVotesAsync(email);
+
+    if (email) {
+      VoteStore.dispatch({
+        type: 'UPDATE_USER',
+        user,
+      });
+    } else {
+      this._emailDialog.show();
+    }
 
     VoteStore.dispatch({
       type: 'UPDATE_DATA',

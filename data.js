@@ -60,8 +60,21 @@ export default [
   {
     title: 'Studyworld',
     author: '@marizikmund',
-    imageName: 'react-conf',
+    imageName: 'studyworld',
     url: "exp://exp.host/@marizikmund/studyworld",
   },
 
+  {
+    title: 'Carte Jaune',
+    author: '@nikgraf',
+    imageName: 'carte-jaune',
+    url: "exp://exp.host/@nikgraf/CarteJaune",
+  },
+
+  {
+    title: 'Codewords',
+    author: '@dmnd',
+    imageName: 'codewords',
+    url: "exp://exp.host/@dmnd/codewords",
+  },
 ];

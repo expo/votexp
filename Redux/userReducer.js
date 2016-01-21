@@ -12,9 +12,7 @@ export default defaultReducer({
   },
 
   UPDATE_USER(state, action) {
-    return {
-      email: action.email,
-    };
+    return action.user;
   }
 
 });
