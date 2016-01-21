@@ -16,6 +16,8 @@ import React, {
 
 const { EXURLHandler } = NativeModules;
 
+import { connect } from 'react-redux';
+
 import FadeIn from 'FadeIn';
 import ResponsiveImage from 'ResponsiveImage';
 import WithFreightSansFont from 'WithFreightSansFont';
@@ -26,7 +28,14 @@ const FontSizeMultiplier = (
   Dimensions.get('window').width <= 320
 ) ?  0.8 : 1;
 
-export default class ContestEntry extends React.Component {
+class ContestEntry extends React.Component {
+
+  static getDataProps(data, props) {
+    return {
+      votes: data.allVotes[props.title] || 0,
+      alreadyVoted: data.myVotes.indexOf(props.title) !== -1,
+    };
+  };
 
   render() {
     let {
@@ -39,22 +48,14 @@ export default class ContestEntry extends React.Component {
       <View style={styles.container} shouldRasterizeIOS>
         <View style={styles.meta}>
           <TouchableOpacity style={{flexDirection: 'row', marginRight: 10, alignItems: 'center', justifyContent: 'center'}}>
-            <ResponsiveImage filename="heart-empty" style={{width: 18, height: 17}} />
+            <ResponsiveImage filename={this.props.alreadyVoted ? "heart-full" : "heart-empty"} style={{width: 18, height: 17}} />
             <WithFreightSansFont>
               <Text style={styles.voteButtonText}>
-                35
+                {this.props.votes}
               </Text>
             </WithFreightSansFont>
           </TouchableOpacity>
 
-          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-            <ResponsiveImage filename="open-count" style={{width: 18, height: 18}} />
-            <WithFreightSansFont>
-              <Text style={styles.viewCountText}>
-                20
-              </Text>
-            </WithFreightSansFont>
-          </View>
         </View>
 
         <TouchableHighlight
@@ -94,6 +95,16 @@ export default class ContestEntry extends React.Component {
       </View>
     );
   }
+
+  // <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+  //   <ResponsiveImage filename="open-count" style={{width: 18, height: 18}} />
+  //   <WithFreightSansFont>
+  //     <Text style={styles.viewCountText}>
+  //       0
+  //     </Text>
+  //   </WithFreightSansFont>
+  // </View>
+
 
   _openEntry() {
     if (Platform.OS === 'android' && this.props.iosOnly) {
@@ -188,3 +199,8 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === 'ios' ? 3 : 0,
   },
 });
+
+
+export default connect(
+  (data, props) => ContestEntry.getDataProps(data, props),
+)(ContestEntry);

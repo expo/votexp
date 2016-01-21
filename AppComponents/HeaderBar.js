@@ -30,6 +30,7 @@ export default class HeaderBar extends React.Component {
             </Text>
           </WithFreightSansFont>
 
+          { /*
           <WithFreightSansFont>
             <TouchableOpacity
               onPress={this.props.onPressInfo}
@@ -38,7 +39,7 @@ export default class HeaderBar extends React.Component {
                 i
               </Text>
             </TouchableOpacity>
-          </WithFreightSansFont>
+          </WithFreightSansFont> */ }
         </View>
 
         <View style={styles.statusBarUnderlay} />

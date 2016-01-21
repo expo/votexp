@@ -10,36 +10,46 @@ import React, {
   View,
 } from 'react-native';
 
+import { Provider } from 'react-redux';
+
 import Api from 'Api';
 import ContestEntryList from 'ContestEntryList';
 import HeaderBar from 'HeaderBar';
 import InfoDialog from 'InfoDialog';
+import VoteStore from 'VoteStore';
 
 class VoteApp extends React.Component {
 
-  async componentWillMount() {
+  componentWillMount() {
     if (StatusBarIOS) {
       StatusBarIOS.setStyle('light-content', false);
     }
 
-    // let result = await Api.getVotesAsync();
-    // alert(JSON.stringify(result));
-
-    // let other = await Api.submitVoteAsync('brentvatne@gmail.com', 'Den');
-    // alert(JSON.stringify(other));
+    this._loadData();
   }
 
   render() {
     return (
-      <View style={styles.outerContainer}>
-        <View style={styles.innerContainer}>
-          <ContestEntryList />
-          <HeaderBar onPressInfo={this._handlePressInfo.bind(this)} />
-        </View>
+      <Provider store={VoteStore}>
+        <View style={styles.outerContainer}>
+          <View style={styles.innerContainer}>
+            <ContestEntryList />
+            <HeaderBar onPressInfo={this._handlePressInfo.bind(this)} />
+          </View>
 
-        <InfoDialog ref={view => { this._infoDialog = view; }} />
-      </View>
+          <InfoDialog ref={view => { this._infoDialog = view; }} />
+        </View>
+      </Provider>
     );
+  }
+
+  async _loadData() {
+    let result = await Api.getVotesAsync();
+
+    VoteStore.dispatch({
+      type: 'UPDATE_DATA',
+      result,
+    });
   }
 
   _handlePressInfo() {
