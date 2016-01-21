@@ -1,0 +1,15 @@
+{
+  "name": "votexp",
+  "version": "0.0.0",
+  "description": "Hello Exponent!",
+  "main": "main.js",
+  "author": "brentvatne@gmail.com",
+  "dependencies": {
+    "@exponent/react-native-responsive-image": "0.0.4",
+    "@exponent/with-custom-font": "^1.0.0",
+    "react-mixin": "^3.0.3",
+    "react-native": "github:exponentjs/react-native#2016-01-02",
+    "react-native-clone-referenced-element": "^1.0.0",
+    "react-timer-mixin": "^0.13.3"
+  }
+}
