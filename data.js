@@ -77,4 +77,11 @@ export default [
     imageName: 'codewords',
     url: "exp://exp.host/@dmnd/codewords",
   },
+
+  {
+    title: 'ExpHub',
+    author: '@cmcewen',
+    imageName: 'exp-hub',
+    url: "exp://exp.host/@cmcewen/ExpHub",
+  },
 ];
