@@ -57,4 +57,11 @@ export default [
     url: "exp://exp.host/@Charca/reactjs-conf-2016",
   },
 
+  {
+    title: 'Studyworld',
+    author: '@marizikmund',
+    imageName: 'react-conf',
+    url: "exp://exp.host/@marizikmund/studyworld",
+  },
+
 ];

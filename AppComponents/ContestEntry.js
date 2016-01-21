@@ -36,9 +36,9 @@ export default class ContestEntry extends React.Component {
     } = this.props;
 
     return (
-      <View style={styles.container}>
+      <View style={styles.container} shouldRasterizeIOS>
         <View style={styles.meta}>
-          <TouchableOpacity style={{flexDirection: 'row', marginRight: 8,}}>
+          <TouchableOpacity style={{flexDirection: 'row', marginRight: 10, alignItems: 'center', justifyContent: 'center'}}>
             <ResponsiveImage filename="heart-empty" style={{width: 18, height: 17}} />
             <WithFreightSansFont>
               <Text style={styles.voteButtonText}>
@@ -47,7 +47,7 @@ export default class ContestEntry extends React.Component {
             </WithFreightSansFont>
           </TouchableOpacity>
 
-          <View style={{flexDirection: 'row'}}>
+          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
             <ResponsiveImage filename="open-count" style={{width: 18, height: 18}} />
             <WithFreightSansFont>
               <Text style={styles.viewCountText}>
@@ -178,24 +178,13 @@ const styles = StyleSheet.create({
     fontFamily: 'FreightSansLFPro',
     fontSize: 20 * FontSizeMultiplier,
     color: '#888',
+    paddingTop: Platform.OS === 'ios' ? 3 : 0,
   },
   viewCountText: {
     marginLeft: 3,
     fontFamily: 'FreightSansLFPro',
     fontSize: 20 * FontSizeMultiplier,
     color: '#888',
-  },
-  countsContainer: {
-    flex: 1,
-    justifyContent: 'flex-end',
-  },
-  countsAlignment: {
-    alignSelf: 'flex-end',
-    paddingRight: 10,
-  },
-  countsText: {
-    fontFamily: 'FreightSansLFPro',
-    fontSize: 20 * FontSizeMultiplier,
-    color: '#888',
+    paddingTop: Platform.OS === 'ios' ? 3 : 0,
   },
 });

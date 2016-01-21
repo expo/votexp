@@ -10,6 +10,8 @@
     "react-mixin": "^3.0.3",
     "react-native": "github:exponentjs/react-native#2016-01-02",
     "react-native-clone-referenced-element": "^1.0.0",
-    "react-timer-mixin": "^0.13.3"
+    "react-redux": "^4.0.6",
+    "react-timer-mixin": "^0.13.3",
+    "redux": "^3.0.5"
   }
 }

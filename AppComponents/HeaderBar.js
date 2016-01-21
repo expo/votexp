@@ -32,7 +32,7 @@ export default class HeaderBar extends React.Component {
 
           <WithFreightSansFont>
             <TouchableOpacity
-              onPress={() => this._handlePress()}
+              onPress={this.props.onPressInfo}
               style={styles.helpButton}>
               <Text style={styles.helpButtonText}>
                 i
@@ -44,10 +44,6 @@ export default class HeaderBar extends React.Component {
         <View style={styles.statusBarUnderlay} />
       </View>
     );
-  }
-
-  _handlePress() {
-    alert('ok!');
   }
 }
 
