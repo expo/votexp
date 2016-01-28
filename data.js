@@ -84,4 +84,11 @@ export default [
     imageName: 'exp-hub',
     url: "exp://exp.host/@cmcewen/ExpHub",
   },
+
+  {
+    title: 'Twister',
+    author: '@flubstep',
+    imageName: 'twister',
+    url: "exp://exp.host/@flubstep/Twister",
+  },
 ];

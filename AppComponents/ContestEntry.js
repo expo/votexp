@@ -49,16 +49,14 @@ class ContestEntry extends React.Component {
     return (
       <View style={styles.container} shouldRasterizeIOS>
         <View style={styles.meta}>
-          <TouchableOpacity
-            onPress={() => { this._submitVoteAsync() }}
-            style={{flexDirection: 'row', marginRight: 10, alignItems: 'center', justifyContent: 'center'}}>
+          <View style={{flexDirection: 'row', marginRight: 10, alignItems: 'center', justifyContent: 'center'}}>
             <ResponsiveImage filename={this.props.alreadyVoted ? "heart-full" : "heart-empty"} style={{width: 19, height: 17}} />
             <WithFreightSansFont>
               <Text style={styles.voteButtonText}>
                 {this.props.votes} {this.props.votes === 0 || this.props.votes > 1 ? 'votes' : 'vote'}
               </Text>
             </WithFreightSansFont>
-          </TouchableOpacity>
+          </View>
 
         </View>
 
