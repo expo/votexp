@@ -6,7 +6,7 @@ import Exponent from 'exponent';
 import React from 'react';
 import {
   AppRegistry,
-  StatusBarIOS,
+  StatusBar,
   StyleSheet,
   View,
 } from 'react-native';
@@ -29,10 +29,6 @@ class VoteApp extends React.Component {
   };
 
   async componentWillMount() {
-    if (StatusBarIOS) {
-      // StatusBarIOS.setStyle('light-content', false);
-    }
-
     this._loadDataAsync();
   }
 
@@ -47,6 +43,7 @@ class VoteApp extends React.Component {
           <View style={styles.innerContainer}>
             <ContestEntryList />
             <HeaderBar onPressInfo={this._handlePressInfo.bind(this)} />
+            <StatusBar barStyle="light-content" />
           </View>
 
           { /* <InfoDialog ref={view => { this._infoDialog = view; }} /> */ }
