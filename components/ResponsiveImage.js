@@ -3,9 +3,11 @@
  */
 'use strict';
 
-import React, {
-  Image,
+import React,{
   PropTypes,
+} from 'react';
+import {
+  Image,
   View,
 } from 'react-native';
 

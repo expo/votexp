@@ -1,9 +1,9 @@
 /**
  * @providesModule InfoDialog
  */
-'use strict';
 
-import React, {
+import React from 'react';
+import {
   Animated,
   StyleSheet,
   Text,
@@ -13,12 +13,8 @@ import React, {
 } from 'react-native';
 
 export default class InfoDialog extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      visibileValue: new Animated.Value(0),
-    };
+  state = {
+    visibileValue: new Animated.Value(0),
   }
 
   render() {

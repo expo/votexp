@@ -1,9 +1,10 @@
 /**
  * @providesModule EmailDialog
  */
-'use strict';
 
-import React, {
+
+import React from 'react';
+import {
   Animated,
   Dimensions,
   StyleSheet,
@@ -15,16 +16,17 @@ import React, {
 } from 'react-native';
 
 import AccountStorage from 'AccountStorage';
+import {
+  RegularText,
+  BoldText,
+} from 'StyledText';
+
 import VoteStore from 'VoteStore';
 
 export default class EmailDialog extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      visibileValue: new Animated.Value(0),
-      email: null,
-    };
+  state = {
+    visibileValue: new Animated.Value(0),
+    email: null,
   }
 
   render() {
@@ -41,13 +43,13 @@ export default class EmailDialog extends React.Component {
 
         <TouchableWithoutFeedback>
           <Animated.View style={[styles.contentContainer, {opacity: this.state.visibileValue}]}>
-            <Text style={styles.prompt}>
+            <RegularText style={styles.prompt}>
               Identify yourself to vote!
-            </Text>
+            </RegularText>
 
-            <Text style={styles.subheader}>
+            <RegularText style={styles.subheader}>
               yeah, it's easy to cheat, don't be a jerk
-            </Text>
+            </RegularText>
 
             <TextInput
               ref={view => { this._emailInput = view; }}
@@ -131,7 +133,6 @@ const styles = StyleSheet.create({
   },
 
   prompt: {
-    fontFamily: 'FreightSansLFPro',
     fontSize: 18,
   },
 
@@ -145,7 +146,6 @@ const styles = StyleSheet.create({
   },
 
   subheader: {
-    fontFamily: 'FreightSansLFPro',
     fontSize: 16,
     color: '#ccc',
   },

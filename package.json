@@ -5,18 +5,18 @@
   "main": "main.js",
   "author": "brentvatne@gmail.com",
   "dependencies": {
-    "@exponent/react-native-responsive-image": "0.0.4",
-    "@exponent/with-custom-font": "^1.0.0",
+    "@exponent/react-native-responsive-image": "^1.0.0",
+    "@exponent/vector-icons": "^1.0.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-react-native-stage-0": "^1.0.1",
+    "exponent": "^9.0.0",
+    "react": "15.2.1",
+    "react-clone-referenced-element": "^1.0.1",
     "react-mixin": "^3.0.3",
-    "react-native": "github:exponentjs/react-native#2016-01-02",
-    "react-native-clone-referenced-element": "^1.0.0",
-    "react-redux": "^4.0.6",
+    "react-native": "github:exponentjs/react-native#sdk-9.0.1",
+    "react-redux": "^4.4.5",
     "react-timer-mixin": "^0.13.3",
-    "redux": "^3.0.5"
-  },
-  "exp": {
-    "name": "React.js Conf Contest Entries",
-    "primaryColor": "#151518",
-    "iconUrl": "https://s3-us-west-2.amazonaws.com/votexp/react-conf-contest-logo.png"
+    "redux": "^3.5.2",
+    "redux-effex": "1.0.0"
   }
 }

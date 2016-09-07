@@ -1,7 +1,6 @@
 /**
  * @providesModule userReducer
  */
-'use strict';
 
 import defaultReducer from 'defaultReducer';
 

@@ -1,7 +1,6 @@
 /**
  * @providesModule allVotesReducer
  */
-'use strict';
 
 import defaultReducer from 'defaultReducer';
 

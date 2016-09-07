@@ -1,7 +1,6 @@
 /**
  * @providesModule VoteStore
  */
-'use strict';
 
 import { combineReducers, createStore } from 'redux';
 

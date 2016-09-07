@@ -1,7 +1,6 @@
 /**
  * @providesModule shuffle
  */
-'use strict';
 
 export default function shuffle(array) {
   var counter = array.length, temp, index;

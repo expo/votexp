@@ -1,9 +1,10 @@
 /**
  * @providesModule VoteApp
  */
-'use strict';
 
-import React, {
+import Exponent from 'exponent';
+import React from 'react';
+import {
   AppRegistry,
   StatusBarIOS,
   StyleSheet,
@@ -19,20 +20,27 @@ import EmailDialog from 'EmailDialog';
 import HeaderBar from 'HeaderBar';
 import InfoDialog from 'InfoDialog';
 import VoteStore from 'VoteStore';
+import cacheAssetsAsync from 'cacheAssetsAsync';
 
 class VoteApp extends React.Component {
 
-  componentWillMount() {
-    if (StatusBarIOS) {
-      StatusBarIOS.setStyle('light-content', false);
-    }
-  }
+  state = {
+    isReady: false,
+  };
 
-  componentDidMount() {
-    this._loadData();
+  async componentWillMount() {
+    if (StatusBarIOS) {
+      // StatusBarIOS.setStyle('light-content', false);
+    }
+
+    this._loadDataAsync();
   }
 
   render() {
+    if (!this.state.isReady) {
+      return <Exponent.Components.AppLoading />;
+    }
+
     return (
       <Provider store={VoteStore}>
         <View style={styles.outerContainer}>
@@ -48,23 +56,36 @@ class VoteApp extends React.Component {
     );
   }
 
-  async _loadData() {
+  async _loadDataAsync() {
     let user = await AccountStorage.loadAccountAsync();
     let email = user && user.email;
-    let result = await Api.getVotesAsync(email);
+    let fetchResults = Api.getVotesAsync(email);
+    let cacheAssets = cacheAssetsAsync({
+      images: [
+      ],
+      fonts: [
+        {'freight-sans-bold': require('./assets/fonts/FreigSanLFProBol.otf')},
+        {'freight-sans': require('./assets/fonts/FreigSanLFProBoo.otf')},
+      ],
+    })
 
-    if (email) {
+    let [ result, ...rest ] = await Promise.all([ fetchResults, cacheAssets ]);
+    this.setState({isReady: true});
+
+    requestAnimationFrame(() => {
+      if (email) {
+        VoteStore.dispatch({
+          type: 'UPDATE_USER',
+          user,
+        });
+      } else {
+        this._emailDialog.show();
+      }
+
       VoteStore.dispatch({
-        type: 'UPDATE_USER',
-        user,
+        type: 'UPDATE_DATA',
+        result,
       });
-    } else {
-      this._emailDialog.show();
-    }
-
-    VoteStore.dispatch({
-      type: 'UPDATE_DATA',
-      result,
     });
   }
 

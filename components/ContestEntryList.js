@@ -1,9 +1,9 @@
 /**
  * @providesModule ContestEntryList
  */
-'use strict';
 
-import React, {
+import React from 'react';
+import {
   ListView,
   StyleSheet,
   View,

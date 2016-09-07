@@ -1,7 +1,6 @@
 /**
  * @providesModule Api
  */
-'use strict';
 
 const API_ORIGIN = 'https://exponent-contest.herokuapp.com';
 

@@ -3,15 +3,18 @@
  */
 'use strict';
 
-import React, {
+import React from 'react';
+import {
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 
+import {
+  RegularText,
+} from 'StyledText';
 import ResponsiveImage from 'ResponsiveImage';
-import WithFreightSansFont from 'WithFreightSansFont';
 
 export default class HeaderBar extends React.Component {
 
@@ -24,22 +27,10 @@ export default class HeaderBar extends React.Component {
             style={styles.image}
           />
 
-          <WithFreightSansFont>
-            <Text style={styles.title}>
-              Contest Entries
-            </Text>
-          </WithFreightSansFont>
+          <RegularText style={styles.title}>
+            Contest Entries
+          </RegularText>
 
-          { /*
-          <WithFreightSansFont>
-            <TouchableOpacity
-              onPress={this.props.onPressInfo}
-              style={styles.helpButton}>
-              <Text style={styles.helpButtonText}>
-                i
-              </Text>
-            </TouchableOpacity>
-          </WithFreightSansFont> */ }
         </View>
 
         <View style={styles.statusBarUnderlay} />
@@ -84,27 +75,7 @@ const styles = StyleSheet.create({
 
   title: {
     color: '#fff',
-    fontFamily: 'FreightSansLFPro',
     fontSize: 25,
     lineHeight: 32,
-  },
-
-  helpButton: {
-    width: 27,
-    height: 27,
-    borderRadius: 13.5,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
-    right: 0,
-    bottom: 17,
-  },
-
-  helpButtonText: {
-    fontSize: 24,
-    fontFamily: 'FreightSansLFPro',
-    fontStyle: 'italic',
-    backgroundColor: 'transparent',
   },
 });

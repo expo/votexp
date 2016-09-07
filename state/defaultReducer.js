@@ -1,7 +1,6 @@
 /**
  * @providesModule defaultReducer
  */
-'use strict';
 
 /*
  * Return a reducer that runs the reducer `reductions[action]`, defaulting to

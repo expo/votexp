@@ -1,28 +1,30 @@
 /**
  * @providesModule ContestEntry
  */
-'use strict';
 
-import React, {
+import React from 'react';
+import {
   Dimensions,
   NativeModules,
   Platform,
   StyleSheet,
   Text,
+  Image,
   TouchableHighlight,
+  ToastAndroid,
   TouchableOpacity,
   View,
 } from 'react-native';
-
-const { EXURLHandler } = NativeModules;
 
 import { connect } from 'react-redux';
 
 import Api from 'Api';
 import FadeIn from 'FadeIn';
 import ResponsiveImage from 'ResponsiveImage';
-import WithFreightSansFont from 'WithFreightSansFont';
-import WithFreightSansBoldFont from 'WithFreightSansBoldFont';
+import {
+  RegularText,
+  BoldText,
+} from 'StyledText';
 
 const FontSizeMultiplier = (
   Platform.OS === 'android' ||
@@ -50,12 +52,13 @@ class ContestEntry extends React.Component {
       <View style={styles.container} shouldRasterizeIOS>
         <View style={styles.meta}>
           <View style={{flexDirection: 'row', marginRight: 10, alignItems: 'center', justifyContent: 'center'}}>
-            <ResponsiveImage filename={this.props.alreadyVoted ? "heart-full" : "heart-empty"} style={{width: 19, height: 17}} />
-            <WithFreightSansFont>
-              <Text style={styles.voteButtonText}>
-                {this.props.votes} {this.props.votes === 0 || this.props.votes > 1 ? 'votes' : 'vote'}
-              </Text>
-            </WithFreightSansFont>
+            <Image
+              source={this.props.alreadyVoted ? require('../assets/images/heart-full.png') : require('../assets/images/heart-empty.png')}
+              style={{width: 19, height: 17}}
+            />
+            <RegularText style={styles.voteButtonText}>
+              {this.props.votes} {this.props.votes === 0 || this.props.votes > 1 ? 'votes' : 'vote'}
+            </RegularText>
           </View>
 
         </View>
@@ -72,23 +75,19 @@ class ContestEntry extends React.Component {
                   style={{width: 60, height: 60, borderRadius: 30,}} />
               </FadeIn>
 
-              <WithFreightSansBoldFont>
-                <View style={styles.titleAndAuthor}>
-                  <Text style={styles.title}>
-                    {title}
-                  </Text>
+              <View style={styles.titleAndAuthor}>
+                <BoldText style={styles.title}>
+                  {title}
+                </BoldText>
 
-                  <WithFreightSansFont>
-                    <Text style={styles.author}>
-                      by {author}
-                    </Text>
-                  </WithFreightSansFont>
-                </View>
-              </WithFreightSansBoldFont>
+                <RegularText style={styles.author}>
+                  by {author}
+                </RegularText>
+              </View>
             </View>
 
-            <View style={styles.caratContainer}>
-              <Text style={styles.carat}>
+            <View style={styles.caretContainer}>
+              <Text style={styles.caret}>
                 &gt;
               </Text>
             </View>
@@ -97,15 +96,6 @@ class ContestEntry extends React.Component {
       </View>
     );
   }
-
-  // <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-  //   <ResponsiveImage filename="open-count" style={{width: 18, height: 18}} />
-  //   <WithFreightSansFont>
-  //     <Text style={styles.viewCountText}>
-  //       0
-  //     </Text>
-  //   </WithFreightSansFont>
-  // </View>
 
   async _submitVoteAsync() {
     let {
@@ -127,9 +117,9 @@ class ContestEntry extends React.Component {
 
   _openEntry() {
     if (Platform.OS === 'android' && this.props.iosOnly) {
-      React.ToastAndroid.show('Sorry, this entry is iOS only :(', 500);
+      ToastAndroid.show('Sorry, this entry is iOS only :(', 500);
     } else {
-      EXURLHandler.openURLAsync(this.props.url);
+      Linking.openURL(this.props.url);
     }
   }
 }
@@ -154,14 +144,14 @@ const styles = StyleSheet.create({
   appInfo: {
     flexDirection: 'row',
   },
-  caratContainer: {
+  caretContainer: {
     position: 'absolute',
     top: 10,
     right: 0,
     bottom: 0,
     backgroundColor: 'transparent',
   },
-  carat: {
+  caret: {
     fontSize: 26 * FontSizeMultiplier,
     color: '#e1e1e1',
   },
@@ -172,12 +162,10 @@ const styles = StyleSheet.create({
     paddingTop: 3,
   },
   title: {
-    fontFamily: 'FreightSansLFPro',
     fontWeight: 'bold',
     fontSize: 21 * FontSizeMultiplier,
   },
   author: {
-    fontFamily: 'FreightSansLFPro',
     fontSize: 20 * FontSizeMultiplier,
   },
   meta: {
@@ -205,14 +193,12 @@ const styles = StyleSheet.create({
   },
   voteButtonText: {
     marginLeft: 4,
-    fontFamily: 'FreightSansLFPro',
     fontSize: 20 * FontSizeMultiplier,
     color: '#888',
     paddingTop: Platform.OS === 'ios' ? 3 : 0,
   },
   viewCountText: {
     marginLeft: 4,
-    fontFamily: 'FreightSansLFPro',
     fontSize: 20 * FontSizeMultiplier,
     color: '#888',
     paddingTop: Platform.OS === 'ios' ? 3 : 0,

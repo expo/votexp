@@ -5,7 +5,8 @@
  */
 'use strict';
 
-import React, {
+import React from 'react';
+import {
   Animated,
   StyleSheet,
   View,
@@ -13,7 +14,7 @@ import React, {
 import TimerMixin from 'react-timer-mixin';
 
 import reactMixin from 'react-mixin';
-import cloneReferencedElement from 'react-native-clone-referenced-element';
+import cloneReferencedElement from 'react-clone-referenced-element';
 
 export default class FadeIn extends React.Component {
 
