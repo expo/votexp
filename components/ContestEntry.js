@@ -5,13 +5,14 @@
 import React from 'react';
 import {
   Dimensions,
+  Image,
+  Linking,
   NativeModules,
   Platform,
   StyleSheet,
   Text,
-  Image,
-  TouchableHighlight,
   ToastAndroid,
+  TouchableHighlight,
   TouchableOpacity,
   View,
 } from 'react-native';
